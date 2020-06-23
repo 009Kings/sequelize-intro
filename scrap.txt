@@ -1,0 +1,10 @@
+User
+---
+firstName: string (NOT NULL),
+lastName: string,
+age: integer,
+email: string (UNIQUE and NOT NULL)
+
+sequelize model:create --name user --attributes firstName:string,lastName:string,age:integer,email:string
+sequelize db:migrate
+sequelize db:migrate:undo

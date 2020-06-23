@@ -55,17 +55,17 @@ const errorHandler = error => {
 
 // UPDATE
 // UPDATE users SET age = 99 WHERE email = 'b.hague@ga.co`;
-db.user.update({ 
-  age: 99 
-}, { 
-  where: { 
-    email: 'b.hague@ga.co' 
-  } 
-}).then(updated => {
-  console.log('💇‍♂️');
-  // updated is an array of one value which is the number of items updated
-  console.log(updated);
-}).catch(errorHandler);
+// db.user.update({ 
+//   age: 99 
+// }, { 
+//   where: { 
+//     email: 'b.hague@ga.co' 
+//   } 
+// }).then(updated => {
+//   console.log('💇‍♂️');
+//   // updated is an array of one value which is the number of items updated
+//   console.log(updated);
+// }).catch(errorHandler);
 
 // DESTROY
 // db.user.destroy({
@@ -80,3 +80,51 @@ db.user.update({
 //   // any kind of cleanup or other things
 //   console.log('Donskies')
 // })
+
+/* ---------- Adding pets ----------- */
+
+// createModel
+// db.user.findOne().then(user => {
+//   user.createPet({
+//     name: 'Gracie',
+//     species: 'Mutt Dog',
+//     description: 'Cute but neurotic pooch who bites people'
+//   }).then(pet => {
+//     console.log(`🐕 Hello there ${pet.name}!`);
+//   }).catch(errorHandler);
+// }).catch(errorHandler);
+
+// getModels
+// Get a user
+// db.user.findOne().then(steve => {
+//   // Get all the pets of the user
+//   steve.getPets().then(pets => {
+//     // Pets is an array
+//     pets.forEach(pet => console.log(`🐕 ${pet.name} is a ${pet.species}`));
+//   }).catch(errorHandler)
+// }).catch(errorHandler)
+
+// setModel
+// db.pet.findOrCreate({
+//   where: {
+//     name: 'Simbuttbutt',
+//     species: 'Ginger Cat'
+//   },
+//   defaults: {
+//     description: 'Traumatised by an aussie, but very cute'
+//   }
+// }).then(([pet, created]) => {
+//   db.user.findOne().then(user => {
+//     // addModel
+//     user.addPet(pet);
+//     console.log(`🔋 User ${user.firstName} is the owner of ${pet.name}`);
+//   }).catch(errorHandler);
+// }).catch(errorHandler);
+
+// include statement
+db.user.findAll({
+  include: [db.pet]
+}).then(users => {
+  // each user object will have a pets key with an array of pets
+  console.log(`🕍 ${users[0].firstName} has ${users[0].pets.length} pets`);
+}).catch(errorHandler);
